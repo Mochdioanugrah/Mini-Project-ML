@@ -1,120 +1,252 @@
-# Klasifikasi Berita Hoax & Non-Hoax di Indonesia  
-*Mini Project – Pembelajaran Mesin*
+# 📰 Klasifikasi Berita Hoax & Non-Hoax di Indonesia  
+*Mini Project – Pembelajaran Mesin (Machine Learning & NLP)*
 
-Repositori ini berisi implementasi proyek machine learning untuk mendeteksi berita **hoax** dan **non-hoax** menggunakan pendekatan *Natural Language Processing (NLP)*. Proyek mencakup proses scraping data, preprocessing teks, ekstraksi fitur, balancing data dengan SMOTE, seleksi fitur, pelatihan model, evaluasi, hingga analisis hasil.
-Tujuannya adalah membangun model klasifikasi teks yang akurat dengan membandingkan berbagai metode representasi fitur dan algoritma machine learning.
+## URGENSI  
+Perkembangan teknologi informasi membuat penyebaran berita menjadi sangat cepat melalui media sosial dan portal daring. Namun, hal ini juga memicu meningkatnya **berita hoaks**, yang dapat menyebabkan:
+
+- Kesalahpahaman publik  
+- Konflik sosial  
+- Manipulasi opini  
+- Kepanikan massal  
+
+Validasi manual berita hoaks memakan waktu besar. Karena itu, sistem otomatis berbasis **Machine Learning (ML)** dan **Natural Language Processing (NLP)** diperlukan untuk mendeteksi hoaks secara cepat dan akurat. Penelitian ini membangun sistem klasifikasi hoaks berbahasa Indonesia menggunakan **ML klasik**, **Deep Learning**, dan **Transformer (IndoBERT)**.
 
 ---
 
-##  Tujuan Penelitian  
-- Mengembangkan model otomatis untuk klasifikasi berita hoax dan non-hoax.  
-- Menganalisis perbedaan performa model dengan dua representasi fitur: **TF-IDF** dan **Word2Vec**.  
-- Membandingkan berbagai model machine learning klasik.  
-- Mengidentifikasi fitur/kata yang paling berpengaruh dalam klasifikasi.  
+## Deskripsi Singkat  
+Repository ini berisi keseluruhan pipeline deteksi hoaks:
+
+- Web scraping dataset (TurnBackHoax & Detik)  
+- Preprocessing teks lengkap  
+- Feature extraction: **TF-IDF**, **Word2Vec**  
+- Balancing data menggunakan SMOTE  
+- Feature selection (Chi-Square, ANOVA F-test, Mutual Information)  
+- Model ML klasik: Logistic Regression, SVM, Random Forest  
+- Model Deep Learning: **MLP**, **BiLSTM**  
+- Model Transformer: **IndoBERT (Fine-Tuned)**  
+- Evaluasi lengkap: accuracy, precision, recall, F1  
+- Error analysis dan insight  
 
 ---
 
-## Dataset  
+## Tujuan Penelitian  
+- Membangun model otomatis untuk mendeteksi berita hoaks.  
+- Menganalisis pengaruh representasi teks terhadap performa model.  
+- Perbandingan metode ML klasik vs Deep Learning vs Transformer.  
+- Mengidentifikasi fitur/kata paling berpengaruh.  
+- Melakukan analisis kesalahan untuk mencegah overfitting/data leakage.
 
-Dataset diambil dari dua sumber resmi:
+---
 
-### 🔹 Sumber Data  
-| Sumber | Keterangan |
-|--------|------------|
-| **TurnBackHoax.id** | Scraping berita hoax yang telah diverifikasi MAFINDO. |
-| **Detik.com** | Scraping berita valid (non-hoax). |
+# Dataset  
 
-### 🔹 Ringkasan Dataset Gabungan  
-- **Total data:** 6.760 berita  
-  - **2.869** hoaks  
-  - **3.891** non-hoaks  
-- **File:** `dataset_hoax_vs_nonhoax_final_filtered.csv`
+## 1. TurnBackHoax.id (Berita Hoaks)
+Contoh:
 
-### 🔹 Contoh Data  
+| Judul | URL | Konten |
+|-------|---------|---------|
+| PENIPUAN – Tautan Pendaftaran PMO | https://turnbackhoax.id/... | Tautan palsu beredar melalui TikTok… |
+| SALAH – Rumah Kapolda Bali Digeruduk Massa | https://turnbackhoax.id/... | Klaim menyesatkan terkait video kerusuhan… |
+
+---
+
+## 2. Detik.com (Berita Non-Hoaks)
+Contoh:
+
+| Judul | Link | Isi Berita |
+|-------|---------|--------------|
+| Hamas Tewaskan 33 Orang… | https://news.detik.com/... | Pembaruan konflik Gaza… |
+| Polda Metro Luncurkan Layanan SIKAP | https://news.detik.com/... | Layanan digital pelaporan masyarakat… |
+
+---
+
+## 🔹 Hasil Penggabungan Dataset  
+Total data: **4.491**  
+- Hoaks: **600**  
+- Non-hoaks: **3.891**
+
+Contoh dataset gabungan:
+
 | Isi Berita | Label |
 |------------|--------|
-| Menaker Sebut Transisi Ekonomi Hijau Momentum ... | non-hoaks |
-| akun tiktok info baru pada kamis unggah foto ... | hoaks |
+| Menaker Sebut Transisi Ekonomi Hijau… | non-hoaks |
+| Karakter Naga Jawa… | non-hoaks |
 
 ---
 
-## Representasi Fitur  
+# 🧹 Preprocessing  
 
-### 1. TF-IDF  
-- 5.000 fitur awal  
-- Seleksi fitur → 2.000 fitur (menggunakan ANOVA F-test)
+Tahapan preprocessing:
 
-#### Hasil Seleksi Fitur  
-| Metode | Fitur Awal | Fitur Terpilih | Rata-rata Skor |
-|--------|------------|----------------|----------------|
+1. **Case Folding**  
+2. **Cleaning (hapus simbol, angka)**  
+3. **Tokenisasi**  
+4. **Stopword Removal**  
+5. **Stemming**  
+6. **Rejoin token → kalimat final**  
+7. **Label encoding (hoaks = 1, non-hoaks = 0)**
+
+Contoh hasil:
+
+| Tahapan | Output |
+|---------|---------|
+| Tokenisasi | ['tautan','pendaftaran','project',...] |
+| Stopword removal | ['akun','tiktok','info','terbaru',...] |
+| Stemming | ['video','tampil','banjir','besar'] |
+| Final text | video tampil banjir besar jakarta |
+
+---
+
+# Feature Extraction  
+
+## TF-IDF  
+Menangkap kata-kata unik per dokumen.  
+5.000 fitur awal → diseleksi menjadi 2.000 fitur.
+
+Top kata TF-IDF:
+
+| Dokumen | Kata | Bobot |
+|---------|--------|--------|
+| 1 | koperasi | 0.322 |
+| 2 | anung | 0.300 |
+| 3 | kapolda | 0.294 |
+
+---
+
+## Word2Vec  
+- Model: **CBOW**  
+- Dimensi: **100-dim**  
+- Panjang sequence: **120**  
+- Representasi semantik lebih dalam dibanding TF-IDF  
+
+---
+
+# Train–Test Split  
+
+| Jenis | Jumlah | Non-Hoax | Hoax |
+|--------|-----------|------------|--------|
+| Train | 3.584 | 86.83% | 13.17% |
+| Test | 897 | 86.85% | 13.15% |
+
+---
+
+# Balancing Data (SMOTE)
+
+| Representasi | Sebelum | Sesudah | Distribusi |
+|--------------|--------------|--------------|----------------|
+| TF-IDF | 3584 | 6224 | 0:3112, 1:3112 |
+| Word2Vec | 3584 | 6224 | 0:3112, 1:3112 |
+
+---
+
+# Seleksi Fitur (TF-IDF)
+
+| Metode | Fitur Awal | Fitur Terpilih | Skor |
+|--------|--------------|----------------|--------|
 | Chi-Square | 5000 | 2000 | 4.6558 |
-| ANOVA F-test | 5000 | 2000 | 146.3059 |
+| ANOVA F-test | 5000 | 2000 | **146.3059** |
 | Mutual Information | 5000 | 2000 | 0.0161 |
 
----
-
-### 2. Word2Vec  
-- Model **CBOW**  
-- Dimensi vektor **100-dim**  
-- Representasi berbasis makna (semantic embedding)
+ANOVA F-test → **metode terbaik**
 
 ---
 
-##  Model Machine Learning yang Diuji  
+# Model Machine Learning Klasik  
 
-| Model | Jenis | Kelebihan | Kekurangan |
-|-------|--------|------------|------------|
-| Logistic Regression | Linear | Cepat dan sederhana | Kurang baik untuk pola non-linear |
-| SVM (LinearSVC) | Margin-based | Akurasi tinggi untuk teks | Lambat pada dataset besar |
-| Random Forest | Ensemble | Tahan noise dan kuat | Interpretasi lebih sulit |
-
----
-
-## Hasil Eksperimen  
-
-### 🔹 A. TF-IDF + Seleksi Fitur  
-| Model | Akurasi | Precision | Recall | F1-Score |
-|--------|---------|------------|---------|-----------|
+## TF-IDF
+| Model | Akurasi | Precision | Recall | F1 |
+|--------|----------|------------|-----------|--------|
 | Logistic Regression | 0.9978 | 1.00 | 0.98–1.00 | 0.99–1.00 |
-| SVM | **1.0000** | 1.00 | 1.00 | 1.00 |
-| Random Forest | **1.0000** | 1.00 | 1.00 | 1.00 |
+| **SVM** | **1.0000** | 1.00 | 1.00 | 1.00 |
+| **Random Forest** | **1.0000** | 1.00 | 1.00 | 1.00 |
 
----
-
-### 🔹 B. Word2Vec (100-D)  
-| Model | Akurasi | Precision | Recall | F1-Score |
-|--------|---------|------------|---------|-----------|
+## Word2Vec
+| Model | Akurasi | Precision | Recall | F1 |
+|--------|----------|------------|-----------|--------|
 | Logistic Regression | 0.9944 | 0.97–1.00 | 0.98–1.00 | 0.98–1.00 |
-| SVM | **0.9955** | 0.98–1.00 | 0.98–1.00 | 0.99 |
+| SVM | 0.9955 | 0.98–1.00 | 0.98–1.00 | 0.99 |
 | Random Forest | 0.9933 | 0.99–1.00 | 0.96–1.00 | 0.97–0.99 |
 
 ---
 
-###  Perbandingan Akurasi TF-IDF vs Word2Vec  
-| Model | TF-IDF (%) | Word2Vec (%) |
-|--------|------------|--------------|
-| Logistic Regression | 99.78 | 99.44 |
-| SVM | **100.00** | 99.55 |
-| Random Forest | **100.00** | 99.33 |
+# Error Analysis  
+Beberapa potensi penyebab akurasi terlalu tinggi:
+
+- Kata-kata sangat khas tiap kelas → mudah dipisahkan  
+- SMOTE mungkin menciptakan pola yang mirip data uji  
+- Seleksi fitur dilakukan sebelum split (potensi data leakage)  
+- Dataset cukup homogen  
+
+Pencegahan:
+
+- **Stratified k-Fold Cross Validation**  
+- Pengujian pada dataset baru/eksternal  
 
 ---
 
-##  Insight  
+# Model Deep Learning  
 
-1. **SVM + TF-IDF** memberikan hasil paling sempurna (100%).  
-2. Representasi **TF-IDF** lebih efektif dibanding Word2Vec pada dataset pendek.  
-3. Dataset relatif mudah dipisahkan karena gaya bahasa hoax & non-hoax berbeda signifikan.  
-4. Performa sangat tinggi perlu diuji ulang dengan **cross-validation** karena berpotensi ada data leakage.  
-5. SMOTE berhasil mengatasi ketidakseimbangan kelas.
+## 1. MLP + TF-IDF (Chi-Square)
+- Akurasi: **99.89%**
+- Salah prediksi: **1 dari 897**
+
+Confusion Matrix:
+
+| Pred / True | Non-Hoax | Hoax |
+|-------------|------------|--------|
+| Non-Hoax | 779 | 0 |
+| Hoax | 1 | 117 |
 
 ---
 
-##  Kesimpulan  
+## 2. BiLSTM + Word2Vec
+- Akurasi: **100%**
+- Tidak ada kesalahan
 
-- **SVM + TF-IDF (2000 fitur ANOVA)** adalah kombinasi terbaik.  
-- TF-IDF memberikan performa paling stabil pada klasifikasi berita.  
-- Word2Vec tetap menghasilkan akurasi sangat tinggi namun sedikit di bawah TF-IDF.  
-- Model perlu diuji pada dataset eksternal untuk validasi lebih kuat.  
-- Sistem dapat dikembangkan menjadi API deteksi hoax atau integrasi ke aplikasi web.
+| Pred / True | Non-Hoax | Hoax |
+|-------------|------------|--------|
+| Non-Hoax | 778 | 0 |
+| Hoax | 0 | 574 |
+
+---
+
+# 3. Transformer Model — IndoBERT (Fine-Tuned)
+
+| Kelas | Precision | Recall | F1 | Support |
+|--------|------------|-----------|----------|------------|
+| Non-Hoax | 1.00 | 1.00 | 1.00 | 778 |
+| Hoax | 1.00 | 1.00 | 1.00 | 574 |
+| **Total** | — | — | **1.00** | 1352 |
+
+**IndoBERT adalah model terbaik di seluruh percobaan.**
+
+---
+
+# Perbandingan Semua Model
+
+| Model | Representasi | Akurasi | Catatan |
+|--------|------------------|------------|-------------|
+| **IndoBERT** | Transformer | **100%** | Terbaik, memahami konteks mendalam |
+| BiLSTM | Word2Vec | 100% | Stabil tanpa error |
+| SVM | TF-IDF | 100% | Model klasik terbaik |
+| MLP | TF-IDF | 99.89% | Sangat baik & cepat |
+
+---
+
+# Insight Utama  
+- TF-IDF kuat untuk model klasik  
+- Word2Vec sangat cocok untuk model sekuensial (BiLSTM)  
+- IndoBERT mengalahkan semua model karena memahami konteks lebih dalam  
+- SMOTE + feature selection meningkatkan performa signifikan  
+- Dataset cenderung mudah dipisahkan karena sumber data jelas berbeda  
+
+---
+
+# Kesimpulan  
+- **IndoBERT adalah model terbaik dan paling akurat (100%)**  
+- **BiLSTM** menduduki posisi kedua dengan performa sempurna  
+- **SVM + TF-IDF** tetap juara dalam kategori model klasik  
+- Representasi fitur sangat memengaruhi hasil  
+- Sistem ini dapat dikembangkan sebagai API pendeteksi hoaks  
 
 ---
