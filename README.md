@@ -25,7 +25,7 @@ Dataset diambil dari dua sumber resmi:
 | **Detik.com** | Scraping berita valid (non-hoax). |
 
 ### 🔹 Ringkasan Dataset Gabungan  
-- **Total data:** 4.491 berita  
+- **Total data:** 6.760 berita  
   - **2.869** hoaks  
   - **3.891** non-hoaks  
 - **File:** `dataset_hoax_vs_nonhoax_final_filtered.csv`
