@@ -26,7 +26,7 @@ Dataset diambil dari dua sumber resmi:
 
 ### 🔹 Ringkasan Dataset Gabungan  
 - **Total data:** 4.491 berita  
-  - **600** hoaks  
+  - **2.869** hoaks  
   - **3.891** non-hoaks  
 - **File:** `dataset_hoax_vs_nonhoax_final_filtered.csv`
 
