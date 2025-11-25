@@ -1,5 +1,6 @@
 # Klasifikasi Berita Hoax & Non-Hoax di Indonesia  
 *Mini Project – Pembelajaran Mesin*
+
 Repositori ini berisi implementasi proyek machine learning untuk mendeteksi berita **hoax** dan **non-hoax** menggunakan pendekatan *Natural Language Processing (NLP)*. Proyek mencakup proses scraping data, preprocessing teks, ekstraksi fitur, balancing data dengan SMOTE, seleksi fitur, pelatihan model, evaluasi, hingga analisis hasil.
 Tujuannya adalah membangun model klasifikasi teks yang akurat dengan membandingkan berbagai metode representasi fitur dan algoritma machine learning.
 
