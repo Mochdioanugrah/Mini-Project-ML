@@ -224,12 +224,17 @@ Confusion Matrix:
 
 # Perbandingan Semua Model
 
-| Model | Representasi | Akurasi | Catatan |
-|--------|------------------|------------|-------------|
-| **IndoBERT** | Transformer | **100%** | Terbaik, memahami konteks mendalam |
-| BiLSTM | Word2Vec | 100% | Stabil tanpa error |
-| SVM | TF-IDF | 100% | Model klasik terbaik |
-| MLP | TF-IDF | 99.89% | Sangat baik & cepat |
+| Model               | Representasi | Akurasi    | Precision | Recall    | F1-Score | Catatan Singkat                                 |
+| ------------------- | ------------ | ---------- | --------- | --------- | -------- | ----------------------------------------------- |
+| Logistic Regression | TF-IDF       | **0.9985** | 1.00      | 1.00      | 1.00     | Sangat akurat, model klasik yang stabil         |
+| SVM (LinearSVC)     | TF-IDF       | **1.0000** | 1.00      | 1.00      | 1.00     | Performa sempurna; model klasik terbaik         |
+| Random Forest       | TF-IDF       | **1.0000** | 1.00      | 1.00      | 1.00     | Sempurna; cocok untuk dataset linear/non-linear |
+| Logistic Regression | Word2Vec     | **0.9896** | 0.99      | 0.99      | 0.99     | Menurun sedikit; Word2Vec kurang optimal        |
+| SVM                 | Word2Vec     | **0.9970** | 1.00      | 1.00      | 1.00     | Hampir sempurna; robust di Word2Vec             |
+| Random Forest       | Word2Vec     | **0.9815** | 0.98–0.99 | 0.97–0.99 | 0.98     | Performa terendah, masih sangat baik            |
+| MLP                 | TF-IDF       | **1.0000** | 1.00      | 0.99–1.00 | 1.00     | Deep learning sederhana, hasil sempurna         |
+| BiLSTM              | Word2Vec     | **1.0000** | 1.00      | 1.00      | 1.00     | Sempurna; Word2Vec + LSTM bekerja sangat baik   |
+| IndoBERT            | Transformer  | **1.0000** | 1.00      | 1.00      | 1.00     | Terbaik dari semua model; memahami konteks      |
 
 ---
 
