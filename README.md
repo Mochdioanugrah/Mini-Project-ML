@@ -61,8 +61,8 @@ Contoh:
 ---
 
 ## 🔹 Hasil Penggabungan Dataset  
-Total data: **4.491**  
-- Hoaks: **600**  
+Total data: **6.760**  
+- Hoaks: **2.869**  
 - Non-hoaks: **3.891**
 
 Contoh dataset gabungan:
