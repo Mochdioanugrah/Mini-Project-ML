@@ -2,8 +2,6 @@
 *Mini Project – Pembelajaran Mesin (Machine Learning, NLP, Deep Learning, Transformer)*
 
 ---
-
-## URGENSI  
 Perkembangan teknologi informasi membuat penyebaran berita sangat cepat melalui media sosial dan portal daring. Namun, kondisi ini mendorong meningkatnya **berita hoaks**, yang berdampak pada:
 
 - Kesalahpahaman publik  
