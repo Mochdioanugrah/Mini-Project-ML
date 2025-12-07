@@ -11,7 +11,7 @@ Perkembangan teknologi informasi membuat penyebaran berita sangat cepat melalui 
 - Manipulasi opini politik/ekonomi  
 - Kepanikan massal  
 
-Validasi manual berita hoaks memakan banyak waktu dan sumber daya. Karena itu, penelitian ini bertujuan membangun sistem otomatis berbasis **Machine Learning (ML)** dan **Natural Language Processing (NLP)** untuk mendeteksi hoaks secara cepat, akurat, dan dapat diskalakan.
+Validasi manual berita hoaks memakan banyak waktu dan sumber daya. Karena itu, penelitian ini bertujuan  membandingkan performa tiga pendekatan klasifikasi teks berbasis **Machine Learning (ML)** untuk mendeteksi hoaks secara cepat dan akurat.
 
 Pendekatan yang digunakan:
 - **ML klasik** (Logistic Regression, SVM, Random Forest)  
@@ -38,7 +38,7 @@ Repository ini berisi pipeline lengkap:
 # Tujuan Penelitian  
 - Membangun sistem otomatis untuk mengklasifikasikan berita hoaks.  
 - Menganalisis pengaruh representasi fitur terhadap performa model.  
-- Membandingkan model ML klasik, Deep Learning, dan Transformer.  
+- Membandingkan model Machine Learning klasik, Deep Learning, dan Model Transfer Learning.  
 - Mengidentifikasi fitur/kata paling berpengaruh.  
 - Meninjau penyebab akurasi model dan potensi data leakage.  
 
