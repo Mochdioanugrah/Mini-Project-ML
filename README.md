@@ -70,8 +70,8 @@ Contoh data:
 ---
 
 ## Hasil Penggabungan Dataset  
-Total: **4.491** artikel  
-- **600** hoaks  
+Total: **6.760** artikel  
+- **2.869** hoaks  
 - **3.891** non-hoaks  
 
 Contoh gabungan:
@@ -132,8 +132,8 @@ Contoh bobot tertinggi:
 
 | Jenis | Jumlah Data | Non-Hoax | Hoax |
 |--------|----------------|-------------|---------|
-| Train | 3.584 | 86.83% | 13.17% |
-| Test | 897 | 86.85% | 13.15% |
+| Train | 5.408 | 57.56% | 42.44% |
+| Test | 1.357 | 57.54% | 42.46% |
 
 ---
 
@@ -141,8 +141,8 @@ Contoh bobot tertinggi:
 
 | Representasi | Sebelum | Sesudah | Distribusi |
 |--------------|--------------|--------------|----------------|
-| TF-IDF | 3.584 | 6.224 | 0:3112, 1:3112 |
-| Word2Vec | 3.584 | 6.224 | 0:3112, 1:3112 |
+| TF-IDF | 5.408 | 6.226 | 0:3112, 1:3112 |
+| Word2Vec | 5.408 | 6.226 | 0:3112, 1:3112 |
 
 ---
 
