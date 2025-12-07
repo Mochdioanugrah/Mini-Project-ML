@@ -120,7 +120,6 @@ Contoh bobot tertinggi:
 ---
 
 ## Word2Vec  
-- Model: **CBOW**  
 - Dimensi vektor: **100**  
 - Digunakan untuk model sekuens (BiLSTM)  
 
