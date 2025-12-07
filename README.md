@@ -34,7 +34,7 @@ Repository ini berisi pipeline lengkap:
 ---
 
 # Tujuan Penelitian  
-- Membangun sistem otomatis untuk mengklasifikasikan berita hoaks.  
+- Membangun model untuk mengklasifikasikan berita hoaks.  
 - Menganalisis pengaruh representasi fitur terhadap performa model.  
 - Membandingkan model Machine Learning klasik, Deep Learning, dan Model Transfer Learning.  
 - Mengidentifikasi fitur/kata paling berpengaruh.  
