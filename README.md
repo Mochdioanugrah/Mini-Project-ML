@@ -216,7 +216,7 @@ Solusi:
 
 ---
 
-# 3. Transformer — IndoBERT (Full Fine-Tuning)
+#  Model Transfer Learning IndoBERT (Full Fine-Tuning)
 
 | Kelas | Precision | Recall | F1 | Support |
 |--------|------------|-----------|----------|------------|
@@ -226,7 +226,7 @@ Solusi:
 
 ---
 
-# 4. Transformer — IndoBERT + LoRA (PEFT)
+# 4. Model Transfer Learning IndoBERT + LoRA (PEFT)
 
 - Akurasi identik dengan fine-tuning penuh  
 - Latihan lebih ringan dan efisien  
