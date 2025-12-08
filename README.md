@@ -2,14 +2,7 @@
 *Mini Project – Pembelajaran Mesin (Machine Learning, NLP, Deep Learning, Transformer)*
 
 ---
-Perkembangan teknologi informasi membuat penyebaran berita sangat cepat melalui media sosial dan portal daring. Namun, kondisi ini mendorong meningkatnya **berita hoaks**, yang berdampak pada:
-
-- Kesalahpahaman publik  
-- Konflik sosial  
-- Manipulasi opini politik/ekonomi  
-- Kepanikan massal  
-
-Validasi manual berita hoaks memakan banyak waktu dan sumber daya. Karena itu, penelitian ini bertujuan  membandingkan performa tiga pendekatan klasifikasi teks berbasis **Machine Learning (ML)** untuk mendeteksi hoaks secara cepat dan akurat.
+Mini project ini berfokus pada pembangunan dan evaluasi sistem klasifikasi berita hoaks dan non-hoaks menggunakan berbagai pendekatan Machine Learning dan Natural Language Processing (NLP). Tujuan utamanya adalah mengidentifikasi metode terbaik untuk memodelkan teks berita berbahasa Indonesia secara akurat dan dapat dijelaskan.
 
 Pendekatan yang digunakan:
 - **ML klasik** (Logistic Regression, SVM, Random Forest)  
