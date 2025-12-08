@@ -148,8 +148,19 @@ ANOVA → **paling stabil & informatif**
 
 ---
 
-# Model Machine Learning Klasik  
+## Machine Learning Klasik
 
+Pendekatan Machine Learning klasik digunakan sebagai baseline sebelum membandingkannya dengan Deep Learning dan Transformer. Tiga algoritma diterapkan:
+
+- **Logistic Regression** – model linear yang efektif pada data TF-IDF.
+- **Support Vector Machine (SVM / LinearSVC)** – sangat kuat pada data berdimensi tinggi; menjadi model klasik terbaik.
+- **Random Forest** – model ensemble yang menangkap pola non-linear.
+
+Setiap model dievaluasi menggunakan dua jenis representasi fitur:
+- **TF-IDF (2000 fitur terbaik, seleksi ANOVA F-test)**
+- **Word2Vec (embedding 100 dimensi)**
+
+### Hasil – Machine Learning Klasik
 ## TF-IDF
 | Model | Akurasi | Precision | Recall | F1 |
 |--------|----------|------------|-----------|--------|
@@ -183,8 +194,17 @@ Solusi:
 
 ---
 
-# Model Deep Learning  
+## Deep Learning
 
+Pendekatan Deep Learning digunakan untuk mempelajari pola sekuens dan konteks yang tidak dapat ditangkap model klasik. Dua model digunakan:
+
+- **MLP (Multilayer Perceptron)**  
+  Input: TF-IDF (seleksi Chi-Square)
+- **BiLSTM (Bidirectional LSTM)**  
+  Input: Word2Vec 100 dimensi  
+  Memproses urutan dari dua arah → memahami konteks lebih baik
+
+### Hasil – Deep Learning
 ## 1. MLP + TF-IDF (Chi-Square)
 - Akurasi: **99.89%**
 - Salah prediksi: **1 dari 897**
