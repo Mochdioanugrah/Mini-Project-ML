@@ -228,19 +228,27 @@ Solusi:
 
 ---
 
-# Explainable AI (XAI)
+Explainable AI (XAI)
 
-Metode interpretasi:
-- **LIME**  
-- **SHAP**  
-- **Attention Visualization**  
-- **Integrated Gradients**  
+XAI digunakan untuk memahami kontribusi token terhadap prediksi model, khususnya pada model terbaik. Dua metode utama diterapkan:
 
-Kata paling berpengaruh:
-- “palsu”  
-- “bukti”  
-- “presiden”  
-- “tanpa bukti”  
+LIME (Local Interpretable Model-Agnostic Explanations)
+
+Memberikan penjelasan lokal dengan membangun model linier di sekitar satu sampel.
+
+Token seperti “palsu”, “klaim”, “penipuan”, “tanpa bukti” → mendorong prediksi hoaks.
+
+Token seperti “resmi”, “klarifikasi”, “pemerintah”, “laporan” → mengarah ke non-hoaks.
+Hasil LIME menunjukkan bahwa model mengandalkan token semantik yang relevan.
+
+SHAP (SHapley Additive Explanations)
+
+Menghitung nilai Shapley untuk interpretasi global & lokal.
+
+SHAP positif tinggi: “hoaks”, “fitnah”, “viral” → meningkatkan probabilitas hoaks.
+
+SHAP negatif: “kepolisian”, “program”, “klarifikasi” → mengurangi probabilitas hoaks.
+Distribusi SHAP stabil dan tidak menunjukkan shortcut bias.  
 
 ---
 
