@@ -236,7 +236,7 @@ Pendekatan Deep Learning digunakan untuk mempelajari pola sekuens dan konteks ya
 
 ---
 
-# 4. Model Transfer Learning IndoBERT + LoRA (PEFT)
+# Model Transfer Learning IndoBERT + LoRA (PEFT)
 
 - Akurasi identik dengan fine-tuning penuh  
 - Latihan lebih ringan dan efisien  
